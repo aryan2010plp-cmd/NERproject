@@ -1,0 +1,232 @@
+/* ==========================================================================
+   RESET & SYSTEM BASE
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #030712;
+  color: #f3f4f6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   DASHBOARD SHELL
+   ========================================================================== */
+.flex { display: flex; }
+.h-screen { height: 100vh; }
+.w-screen { width: 100vw; }
+.overflow-hidden { overflow: hidden; }
+
+/* Left Sidebar */
+aside.w-64 {
+  width: 280px;
+  min-width: 280px;
+  height: 100vh;
+  background: rgba(10, 15, 30, 0.95);
+  border-right: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  z-index: 50;
+}
+
+/* Main Viewport */
+main.flex-1 {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: radial-gradient(circle at top right, #0a1128 0%, #030712 100%);
+}
+
+/* Header */
+header.h-14 {
+  height: 56px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid #1e293b;
+  backdrop-filter: blur(8px);
+}
+
+/* Scrollable Workspace */
+.flex-1.p-5.overflow-y-auto {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   NAVIGATION & BUTTONS
+   ========================================================================== */
+aside nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+aside nav button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+aside nav button:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+aside nav button.bg-gradient-to-r,
+aside nav button[class*="bg-red-600"] {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #ef4444 !important;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+}
+
+header button, 
+button[class*="bg-gradient-to-r"] {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  color: #fff;
+  border: 1px solid #ef4444;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   GRIDS & METRIC CARDS
+   ========================================================================== */
+.grid-cols-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.grid-cols-3 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  height: 500px;
+}
+
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Card Surface */
+div[class*="bg-slate-900"],
+div[class*="bg-slate-950"] {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 16px;
+  backdrop-filter: blur(8px);
+}
+
+/* Metric Typography */
+.text-xl, .text-2xl {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 6px 0;
+  color: #f8fafc;
+}
+
+/* ==========================================================================
+   LEAFLET GIS MAP CONTAINER
+   ========================================================================== */
+.col-span-2 {
+  position: relative;
+  height: 100%;
+  min-height: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+}
+
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  background: #090e1a !important;
+  z-index: 10;
+}
+
+/* Marker Pulse Radar Animation */
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  70% { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+.pulse-marker {
+  position: relative;
+}
+.pulse-marker::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ef4444;
+  animation: pulse-ring 2s infinite cubic-bezier(0.25, 0, 0, 1);
+}
+
+/* ==========================================================================
+   FORMS & INPUTS
+   ========================================================================== */
+input, select, textarea {
+  width: 100%;
+  background-color: #030712 !important;
+  border: 1px solid #334155 !important;
+  color: #f8fafc !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  outline: none;
+  margin-top: 4px;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #ef4444 !important;
+}
+
+/* Color Tokens */
+.text-cyan-300, .text-cyan-400 { color: #38bdf8 !important; }
+.text-amber-300, .text-amber-400 { color: #fbbf24 !important; }
+.text-red-400, .text-red-500 { color: #f87171 !important; }
+.text-emerald-300, .text-emerald-400 { color: #34d399 !important; }
+.text-slate-400 { color: #94a3b8 !important; }
